@@ -1,7 +1,18 @@
+# Environment /Secrets
 .env
 .venv/
+
+#Python cache
 __pycache__/
 *.pyc
+
+# Mac System files
 .DS_Store
+
+#Generated outputs
 outputs/
 *.log
+
+# Optional: Temporary Files
+*.tmp
+
