@@ -31,9 +31,11 @@ Portfolio-Research-Engine/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
+```
 
 ## Current Workflow
 
+```text
 data/holdings.csv
     ↓
 scripts/fetch_prices.py
@@ -47,58 +49,80 @@ portfolio allocation by holding and category
 scripts/generate_daily_reports.py
     ↓
 outputs/daily_reports/daily_report_YYYY-MM-DD.md
+```
 
-Setup!
+## Setup
 
-1. Create and activate a virtual environment:
+### 1. Create and activate a virtual environment
 
+Mac/Linux:
+
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
+```
 
-2. Install Dependencies
+Windows PowerShell:
 
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+### 2. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-Usage:
+## Usage
 
-1. Update holdings or share counts:
+### Update holdings or share counts
 
+```bash
 python scripts/update_holdings.py
+```
 
-2. Generate portfolio summary in the terminal:
+### Generate portfolio summary in the terminal
 
+```bash
 python scripts/portfolio_summary.py
+```
 
-3. Generate a daily Markdown report:
+### Generate a daily Markdown report
 
+```bash
 python scripts/generate_daily_reports.py
+```
 
-4. Markdown report is saved locally in:
+The Markdown report is saved locally in:
 
+```text
 outputs/daily_reports/
+```
 
 Generated reports are intentionally ignored by Git because they may contain personal portfolio information.
 
-Data Notes
+## Data Notes
 
-data/holdings.csv is the manually maintained source of truth for portfolio holdings.
+`data/holdings.csv` is the manually maintained source of truth for portfolio holdings.
 
-Generated files in outputs/ are not committed to GitHub.
+Generated files in `outputs/` are not committed to GitHub.
 
-Roadmap
- Read holdings from CSV (Done)
- Update share counts manually (Done)
- Retrieve latest available prices (Done)
- Calculate market value and portfolio allocation (Done)
- Generate daily Markdown portfolio reports (Done)
- Add news retrieval by ticker
- Add earnings calendar tracking
- Add thesis/risk notes per holding
- Generate NotebookLM-ready research packets
- Add Notion export
- Add tests
+## Roadmap
 
+- [x] Read holdings from CSV
+- [x] Update share counts manually
+- [x] Retrieve latest available prices
+- [x] Calculate market value and portfolio allocation
+- [x] Generate daily Markdown portfolio reports
+- [ ] Add news retrieval by ticker
+- [ ] Add earnings calendar tracking
+- [ ] Add thesis/risk notes per holding
+- [ ] Generate NotebookLM-ready research packets
+- [ ] Add Notion export
+- [ ] Add tests
 
-Disclaimer
+## Disclaimer
 
 This project is for personal research, education, and workflow automation only. It does not provide financial advice, investment recommendations, or trading signals.
