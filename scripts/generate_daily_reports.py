@@ -5,23 +5,10 @@ from datetime import datetime
 from portfolio_summary import load_holdings, print_category_percentages
 from fetch_prices import fetch_prices_for_holdings
 
+from utils.formatting import format_currency, format_percent
+
 BASE_DIR = Path(__file__).resolve().parents[1]
 OUTPUT_DIR = BASE_DIR / "outputs" / "daily_reports"
-
-def format_percent(value: float) -> str:
-    # Format number as percentage
-
-    if pd.isna(value):
-        return "0.00%"
-    return f"{value:.2f}%"
-
-def format_currency(value: float) -> str:
-    # Format number as percentage
-
-    if pd.isna(value):
-        return "$0.00"
-    return f"{value:.2f}%"
-
 
 
 def build_top_holdings_table(holdings: pd.DataFrame, top_n: int = 10) -> str:
@@ -58,7 +45,6 @@ def build_top_holdings_table(holdings: pd.DataFrame, top_n: int = 10) -> str:
         )
 
     return "\n".join(lines)
-
 
 def build_category_allocation_table(holdings: pd.DataFrame) -> str:
     # Builds a markdown table showing category allocation percentages
@@ -140,7 +126,6 @@ def build_full_holdings_table(holdings: pd.DataFrame) -> str:
 
     return "\n".join(lines)
 
-
 def generate_daily_report(holdings: pd.DataFrame) -> str:
 
     # Generates the full mMarkdown daily portfolio report as a string
@@ -204,7 +189,6 @@ This report is for personal research and workflow automation only. It is not fin
 """
 
     return report
-
 
 def save_daily_report(report: str) -> Path:
     # Save the markdown report to outputs/daily reports

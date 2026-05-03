@@ -92,10 +92,24 @@ def get_latest_price(ticker: str) -> dict:
     return result
 
 
+#fetches prices for all holdings in csv file and merges results back into original holdings dataframe
 def fetch_prices_for_holdings(holdings: pd.DataFrame) -> pd.DataFrame:
+    
+    #Fetch latest prices for all tickers in holdings.csv.
+
     """
-    Fetch latest prices for all tickers in holdings.csv.
+
+    Returns a DataFrame with:
+    - current_price
+    - previous_close
+    - currency
+    - price_status
+    - market_value
+    - portfolio_weight_percent
+
     """
+    
+    
     price_results = []
 
     for ticker in holdings["ticker"]:

@@ -11,6 +11,9 @@ A Python-based research workflow that reads portfolio holdings, retrieves curren
 - Calculates portfolio weight by holding
 - Calculates allocation by category
 - Generates daily Markdown portfolio reports
+- Generates an initial research workspace from holdings data
+- Creates a portfolio risk register template
+- Creates starter thesis files for each holding
 - Saves generated outputs separately from source holdings data
 
 ## Project Structure
@@ -23,11 +26,20 @@ Portfolio-Research-Engine/
 │   ├── update_holdings.py
 │   ├── fetch_prices.py
 │   ├── portfolio_summary.py
-│   └── generate_daily_reports.py
+│   ├── generate_daily_reports.py
+│   └── setup_research_workspace.py
+├── docs/
+│   ├── architecture.md
+│   ├── data_flow.md
+│   └── technical_decisions.md
 ├── outputs/
 │   ├── daily_reports/
 │   ├── prices/
 │   └── portfolio_summaries/
+├── thesis/
+│   ├── portfolio_thesis.md
+│   ├── risk_register.md
+│   └── holdings/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
@@ -50,6 +62,20 @@ scripts/generate_daily_reports.py
     ↓
 outputs/daily_reports/daily_report_YYYY-MM-DD.md
 ```
+
+### Research Workspace Setup Flow
+
+```text
+data/holdings.csv
+    ↓
+scripts/setup_research_workspace.py
+    ↓
+latest price data + market values
+    ↓
+thesis/portfolio_thesis.md
+thesis/risk_register.md
+thesis/holdings/TICKER.md
+
 
 ## Setup
 
@@ -77,11 +103,18 @@ pip install -r requirements.txt
 
 ## Usage
 
+
+
 ### Update holdings or share counts
 
 ```bash
 python scripts/update_holdings.py
 ```
+
+### Generate initial research_workspace
+
+```bash
+python scripts/setup_research_workspace.py
 
 ### Generate portfolio summary in the terminal
 
@@ -107,7 +140,9 @@ Generated reports are intentionally ignored by Git because they may contain pers
 
 `data/holdings.csv` is the manually maintained source of truth for portfolio holdings.
 
-Generated files in `outputs/` are not committed to GitHub.
+Generated files in `outputs/` and personal research files in `thesis/` are not committed to GitHub.
+
+The `thesis/` folder is generated locally and may contain personal investment reasoning, risk notes, and holding-level thesis details.
 
 ## Roadmap
 
@@ -116,9 +151,10 @@ Generated files in `outputs/` are not committed to GitHub.
 - [x] Retrieve latest available prices
 - [x] Calculate market value and portfolio allocation
 - [x] Generate daily Markdown portfolio reports
+- [x] Generate starter thesis/risk templates
+- [ ] Fill out thesis/risk notes per holding
 - [ ] Add news retrieval by ticker
 - [ ] Add earnings calendar tracking
-- [ ] Add thesis/risk notes per holding
 - [ ] Generate NotebookLM-ready research packets
 - [ ] Add Notion export
 - [ ] Add tests
