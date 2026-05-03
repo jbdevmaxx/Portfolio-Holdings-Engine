@@ -2,10 +2,12 @@ import pandas as pd
 from pathlib import Path
 from datetime import datetime
 
-from portfolio_summary import load_holdings, print_category_percentages
+from portfolio_summary import load_holdings
 from fetch_prices import fetch_prices_for_holdings
 
 from utils.formatting import format_currency, format_percent
+from utils.markdown_utils import join_lines
+from utils.file_utils import ensure_directory, write_text_file
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 OUTPUT_DIR = BASE_DIR / "outputs" / "daily_reports"
@@ -44,7 +46,7 @@ def build_top_holdings_table(holdings: pd.DataFrame, top_n: int = 10) -> str:
             f"| {format_percent(row['portfolio_weight_percent'])} |"
         )
 
-    return "\n".join(lines)
+    return join_lines(lines)
 
 def build_category_allocation_table(holdings: pd.DataFrame) -> str:
     # Builds a markdown table showing category allocation percentages
@@ -85,7 +87,7 @@ def build_category_allocation_table(holdings: pd.DataFrame) -> str:
             f"| {format_percent(row['portfolio_weight_percent'])} |"
         )       
 
-    return "\n".join(lines)
+    return join_lines(lines)
 
 def build_full_holdings_table(holdings: pd.DataFrame) -> str:
     #Build a Markdown table showing all holdings.
@@ -124,7 +126,7 @@ def build_full_holdings_table(holdings: pd.DataFrame) -> str:
         )
         
 
-    return "\n".join(lines)
+    return join_lines(lines)
 
 def generate_daily_report(holdings: pd.DataFrame) -> str:
 
@@ -192,13 +194,13 @@ This report is for personal research and workflow automation only. It is not fin
 
 def save_daily_report(report: str) -> Path:
     # Save the markdown report to outputs/daily reports
-
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        
+    ensure_directory(OUTPUT_DIR)
 
     today = datetime.now().strftime("%Y-%m-%d")
     output_file = OUTPUT_DIR / f"daily_report_{today}.md"
 
-    output_file.write_text(report, encoding="utf-8")
+    write_text_file(output_file, report)
 
     return output_file
 

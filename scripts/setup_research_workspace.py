@@ -7,6 +7,8 @@ from portfolio_summary import load_holdings
 from fetch_prices import fetch_prices_for_holdings
 
 from utils.formatting import format_currency, format_percent
+from utils.file_utils import safe_write_file, ensure_directory
+from utils.markdown_utils import join_lines
 
 
 #setting up file paths to write to Thesis folder
@@ -19,18 +21,9 @@ PORTFOLIO_THESIS_FILE = THESIS_DIR/ "portfolio_thesis.md"
 RISK_REGISTER_FILE = THESIS_DIR / "risk_register.md"
 
 def create_directory_structure() -> None:
-    # Ceates thesis folders if they do not exist
-    THESIS_DIR.mkdir(parents = True, exist_ok=True)
-    HOLDINGS_THESIS_DIR.mkdir(parents = True, exist_ok=True)
-
-def safe_write_file(file_path: Path, content: str) -> None:
-    # Safely writes content to a file if it does not exist, o
-    if file_path.exists():
-        print(f"Skipped existing file: {file_path}")
-        return
-    
-    file_path.write_text(content, encoding="utf-8")
-    print(f"Created file: {file_path}")
+    #Creates Thesis folder if they do not already exist
+    ensure_directory(THESIS_DIR)
+    ensure_directory(HOLDINGS_THESIS_DIR)
 
 def build_category_summary(holdings: pd.DataFrame) -> pd.DataFrame:
     # Creates category allocation summary based on market value
@@ -88,6 +81,9 @@ def build_portfolio_thesis_content(holdings: pd.DataFrame) -> str:
             f"({format_percent(row['portfolio_weight_percent'])})"
         )
 
+    category_text = "\n".join(category_lines)
+    top_holdings_text = "\n".join(top_holdings_lines)
+
     content = f"""# Portfolio Thesis - {today}
 
 ## Purpose
@@ -109,11 +105,11 @@ Total estimated market value: **{format_currency(total_market_value)}**
 ## Largest Holdings
 
 
-{chr(10).join(top_holdings_lines)}
+{top_holdings_text}
 
 ## Category Allocation
 
-{chr(10).join(category_lines)}
+{category_text}
 
 ## Portfolio Strategy
 
@@ -199,10 +195,12 @@ def build_risk_register_content(holdings: pd.DataFrame) -> str:
             for _, holding_row in category_holdings.iterrows()
         ]
     
+        affected_holdings_text = join_lines(affected_holdings)
+
         section = f"""### {category}, Risk
 
 Affected Holdings:
-{chr(10).join(affected_holdings)}
+{affected_holdings_text}
 
 Current allocation:
 - {format_currency(row['market_value'])} 
@@ -224,8 +222,9 @@ Sources to monitor:
 - Sector news
 """
         category_risk_sections.append(section)
+        category_risk_sections_text = join_lines(category_risk_sections)
 
-    content = f"""# Portfolio Risk Register - {today}
+        content = f"""# Portfolio Risk Register - {today}
 
 This file tracks portfolio-level risks that may affect multiple holdings.
 
@@ -239,8 +238,7 @@ For each risk theme:
 
 ---
 
-{chr(10).join(category_risk_sections)}
-
+{category_risk_sections_text}
 ## Cross-Portfolio Risks
 
 ### Concentration Risk
@@ -421,15 +419,6 @@ def main():
 
     print("\nFetching Current Prices...")
     holdings = fetch_prices_for_holdings(holdings)
-
-    #Debug function:
-    print("\nColumns after fetch_prices_for_holdings():")
-    print(holdings.columns.tolist())
-
-    print("\nPreview:")
-    print(holdings.head())
-    
-    #Debuf funciton end
 
     print("Creating Thesis Workspace...")
     create_directory_structure()
