@@ -1,0 +1,31 @@
+ticker,company,category,asset_type,shares
+VOO,Vanguard S&P 500 ETF,Core US Equity,ETF,8
+VTI,Vanguard Total Stock Market ETF,Core US Equity,ETF,6
+VXUS,Vanguard Total International Stock ETF,International Equity,ETF,10
+BND,Vanguard Total Bond Market ETF,Fixed Income,ETF,12
+SCHD,Schwab US Dividend Equity ETF,Dividend / Quality,ETF,7
+MSFT,Microsoft,Mega-Cap Tech / AI,Stock,4
+GOOGL,Alphabet,Mega-Cap Tech / AI,Stock,5
+AMZN,Amazon,Mega-Cap Tech / AI,Stock,4
+META,Meta Platforms,Mega-Cap Tech / AI,Stock,3
+CRM,Salesforce,Enterprise Software,Stock,3
+NVDA,Nvidia,Semiconductors / AI Infrastructure,Stock,6
+AMD,Advanced Micro Devices,Semiconductors / AI Infrastructure,Stock,8
+TSM,Taiwan Semiconductor Manufacturing,Semiconductors / AI Infrastructure,ADR,5
+AVGO,Broadcom,Semiconductors / AI Infrastructure,Stock,2
+JPM,JPMorgan Chase,Financials,Stock,5
+BRK-B,Berkshire Hathaway Class B,Financials / Holding Company,Stock,4
+V,Visa,Payments / Financials,Stock,3
+UNH,UnitedHealth Group,Healthcare,Stock,2
+LLY,Eli Lilly,Healthcare,Stock,1
+JNJ,Johnson & Johnson,Healthcare / Defensive,Stock,4
+COST,Costco Wholesale,Consumer Defensive,Stock,1
+PG,Procter & Gamble,Consumer Defensive,Stock,4
+HD,Home Depot,Consumer / Housing,Stock,2
+XOM,Exxon Mobil,Energy,Stock,6
+CAT,Caterpillar,Industrials,Stock,2
+LMT,Lockheed Martin,Defense / Aerospace,Stock,2
+VNQ,Vanguard Real Estate ETF,Real Estate,ETF,8
+GLD,SPDR Gold Shares,Real Assets / Gold,ETF,3
+PLTR,Palantir Technologies,Speculative Growth / AI,Stock,12
+RKLB,Rocket Lab,Speculative Growth / Space,Stock,20
