@@ -1,20 +1,42 @@
 # ThesisOps (Formerly Portfolio Research Engine)
 
-A Python-based research workflow that reads portfolio holdings, retrieves current market prices, calculates allocation by holding and category, and generates daily Markdown portfolio reports for personal research.
+ThesisOps is a Python-based research workflow automation project that turns structured portfolio holdings data into organized, analysis-ready research outputs.
+
+The project reads holdings from a CSV file, retrieves latest available market prices, calculates portfolio allocation, generates Markdown reports, and creates thesis/risk templates for human-in-the-loop investment research. The goal is not to create a stock-picking tool, but to build a repeatable research system that helps users document why they own each position, identify concentration risk, and prepare source material for AI-assisted review.
+
+ThesisOps is designed as a local-first workflow and can be used as a foundation for future integrations with NotebookLM, Notion, AI APIs, dashboards, or other research automation tools.
 
 ## Current Features
 
-- Reads portfolio holdings from CSV
-- Updates share counts manually
-- Retrieves latest available prices using `yfinance`
+- Reads portfolio holdings from a manually maintained CSV file
+- Supports configurable holdings input for personal workflows, demos, and future tests
+- Retrieves latest available price data using `yfinance`
 - Calculates market value per holding
 - Calculates portfolio weight by holding
-- Calculates allocation by category
+- Calculates category-level allocation
 - Generates daily Markdown portfolio reports
-- Generates an initial research workspace from holdings data
-- Creates a portfolio risk register template
-- Creates starter thesis files for each holding
-- Saves generated outputs separately from source holdings data
+- Creates an initial research workspace from holdings data
+- Generates a portfolio-level thesis template
+- Generates a portfolio risk register template
+- Generates individual holding thesis templates
+- Uses shared utility modules for formatting, file writing, and Markdown helpers
+- Keeps generated reports separate from source holdings data
+- Includes sanitized sample holdings and example outputs for public demo use
+- Documents architecture, data flow, and technical decisions
+- Designed for future human-approved AI thesis suggestion workflows
+
+## What This Project Demonstrates
+
+- Python scripting and modular workflow design
+- CSV data ingestion and validation
+- External data retrieval through a price provider
+- Portfolio allocation and concentration analysis
+- Markdown report generation
+- Local-first data privacy design
+- Reusable utility functions
+- Architecture and data-flow documentation
+- Human-in-the-loop AI workflow planning
+- Demo-safe sample data for public presentation
 
 ## Project Structure
 
