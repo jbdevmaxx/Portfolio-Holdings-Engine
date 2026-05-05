@@ -1,4 +1,4 @@
-# ThesisOps
+# ThesisOps (Formerly Portfolio Research Engine)
 
 A Python-based research workflow that reads portfolio holdings, retrieves current market prices, calculates allocation by holding and category, and generates daily Markdown portfolio reports for personal research.
 
